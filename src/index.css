@@ -1,0 +1,211 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Enhanced Design System for Portfolio */
+
+@layer base {
+  :root {
+    /* Light Theme Colors */
+    --background: 255 255 255;
+    --foreground: 0 0 0;
+    --card: 255 255 255;
+    --card-foreground: 0 0 0;
+    --popover: 255 255 255;
+    --popover-foreground: 0 0 0;
+    --primary: 99 102 241;
+    --primary-foreground: 255 255 255;
+    --secondary: 241 245 249;
+    --secondary-foreground: 0 0 0;
+    --muted: 248 250 252;
+    --muted-foreground: 0 0 0;
+    --accent: 244 244 245;
+    --accent-foreground: 0 0 0;
+    --destructive: 239 68 68;
+    --destructive-foreground: 255 255 255;
+    --border: 226 232 240;
+    --input: 226 232 240;
+    --ring: 99 102 241;
+    --radius: 0.75rem;
+    
+    /* Light theme specific */
+    --tech-accent: 147 51 234;
+    --gradient-start: 99 102 241;
+    --gradient-end: 147 51 234;
+    --glow: 99 102 241;
+    --particle: 0 0 0;
+  }
+
+  .dark {
+    /* Dark Theme Colors */
+    --background: 0 0 0;
+    --foreground: 255 255 255;
+    --card: 15 23 42;
+    --card-foreground: 255 255 255;
+    --popover: 15 23 42;
+    --popover-foreground: 255 255 255;
+    --primary: 14 165 233;
+    --primary-foreground: 0 0 0;
+    --secondary: 30 41 59;
+    --secondary-foreground: 255 255 255;
+    --muted: 30 41 59;
+    --muted-foreground: 148 163 184;
+    --accent: 30 41 59;
+    --accent-foreground: 255 255 255;
+    --destructive: 220 38 127;
+    --destructive-foreground: 255 255 255;
+    --border: 30 41 59;
+    --input: 30 41 59;
+    --ring: 14 165 233;
+    
+    /* Dark theme specific */
+    --tech-accent: 217 70 239;
+    --gradient-start: 14 165 233;
+    --gradient-end: 217 70 239;
+    --glow: 14 165 233;
+    --particle: 59 130 246;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-['Poppins'];
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    color: hsl(var(--foreground));
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Force text colors */
+  h1, h2, h3, h4, h5, h6, p, span, a, button {
+    color: hsl(var(--foreground));
+  }
+
+  .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6, 
+  .dark p, .dark span, .dark a, .dark button {
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer components {
+  /* Custom gradient backgrounds */
+  .bg-gradient-cyber {
+    background: linear-gradient(135deg, 
+      hsl(var(--gradient-start)) 0%, 
+      hsl(var(--gradient-end)) 100%);
+  }
+  
+  .bg-gradient-hero {
+    background: radial-gradient(ellipse at top, 
+      hsl(var(--gradient-start) / 0.1) 0%, 
+      transparent 50%),
+      radial-gradient(ellipse at bottom, 
+      hsl(var(--gradient-end) / 0.1) 0%, 
+      transparent 50%);
+  }
+  
+  /* Neon effects for dark mode */
+  .neon-glow {
+    @apply dark:shadow-[0_0_20px_hsl(var(--glow)/0.5)];
+  }
+  
+  .neon-text {
+    color: hsl(var(--foreground));
+  }
+  
+  .dark .neon-text {
+    color: hsl(var(--glow));
+    text-shadow: 0 0 10px hsl(var(--glow));
+  }
+  
+  .neon-border {
+    @apply dark:border-[hsl(var(--glow))] dark:shadow-[0_0_10px_hsl(var(--glow)/0.3)];
+  }
+  
+  /* Glass morphism */
+  .glass {
+    @apply backdrop-blur-md bg-white/10 dark:bg-white/5 border border-white/20;
+  }
+  
+  /* Animated underlines */
+  .animated-underline {
+    @apply relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-gradient-cyber after:transition-all after:duration-300 hover:after:w-full;
+  }
+  
+  /* Particle animation */
+  .particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  
+  .particle {
+    position: absolute;
+    background: hsl(var(--particle));
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-30px) rotate(120deg); }
+    66% { transform: translateY(30px) rotate(240deg); }
+  }
+  
+  /* Pulse animation for profile image */
+  .pulse-ring {
+    @apply absolute inset-0 rounded-full border-2 border-primary/30 animate-ping;
+  }
+  
+  /* Hover animations */
+  .hover-lift {
+    @apply transition-transform duration-300 hover:scale-105 hover:-translate-y-2;
+  }
+  
+  /* Scroll animations */
+  .fade-in-up {
+    @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+  }
+  
+  .fade-in-up.in-view {
+    @apply opacity-100 translate-y-0;
+  }
+}
+
+/* Font families */
+.font-heading {
+  font-family: 'Sora', sans-serif;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/50 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary;
+}
